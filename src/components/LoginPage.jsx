@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext.jsx';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import "./LoginPage.css";
 
 export default function LoginPage({ onGuest }) {
     const { login, signup } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [isLogin, setIsLogin] = useState(true);
+    const [isLogin, setIsLogin] = useState(false);
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = async () => {
+        setError('');
         try {
             if (isLogin) await login(username, password);
             else await signup(username, password);
@@ -21,106 +22,77 @@ export default function LoginPage({ onGuest }) {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', background: '#0f1117', color: '#fff' }}>
-            <h2>{isLogin ? 'Login' : 'Sign Up'}</h2>
+        <div className="login-wrapper">
+          <div className="login-card">
+            <h2 className="login-title">{isLogin ? 'Welcome Back' : 'Create Account'}</h2>
+            <p className="login-subtitle">{isLogin ? 'Continue to Node Revision Course' : 'Start your Node js revision journey'}</p>
 
-            <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)}
-                style={{ padding: '10px', margin: '8px', borderRadius: '6px', border: '1px solid #334155', background: '#1a1d2e', color: '#fff', width: '260px' }} />
+            <form className="login-form" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
+                <div className="input-group">
+                    <label>Username</label>
+                    <input
+                        placeholder="Enter your username"
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
+                        className="login-input"
+                        autoComplete="username"
+                    />
+                </div>
 
-            <div style={{ position: "relative", width: "260px" }}>
-                <input
-                    placeholder="Password"
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    style={{
-                        padding: "10px",
-                        margin: "8px 0",
-                        borderRadius: "6px",
-                        border: "1px solid #334155",
-                        background: "#1a1d2e",
-                        color: "#fff",
-                        width: "100%",
-                        paddingRight: "40px"
-                    }}
-                />
+                <div className="input-group">
+                    <label>Password</label>
+                    <div className="password-wrapper">
+                        <input
+                            placeholder="Enter your password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            className="login-input"
+                            autoComplete={isLogin ? "current-password" : "new-password"}
+                        />
+                        <span
+                            onClick={() => setShowPassword(prev => !prev)}
+                            className="password-toggle"
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    </div>
+                </div>
 
-                <span
-                    onClick={() => setShowPassword(prev => !prev)}
-                    style={{
-                        position: "absolute",
-                        right: "10px",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        cursor: "pointer",
-                        color: "#94a3b8",
-                        transition: "0.2s"
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "#94a3b8")}
+                {error && <div className="login-error-message">{error}</div>}
+
+                <button
+                    type="submit"
+                    className="login-primary-btn"
                 >
-                    {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </span>
+                    {isLogin ? 'Login' : 'Sign Up'}
+                </button>
+            </form>
+
+            <div className="login-divider">
+                <span>OR</span>
             </div>
-            {error && <p style={{ color: '#f87171', fontSize: '13px' }}>{error}</p>}
-
-            <button
-                onClick={handleSubmit}
-                style={{
-                    padding: '10px 24px',
-                    margin: '8px',
-                    background: '#22c55e',
-                    border: 'none',
-                    borderRadius: '6px',
-                    color: '#000',
-                    fontWeight: '600',
-                    cursor: 'pointer',
-                    width: '280px',
-                    transition: 'all 0.2s ease'
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.02)";
-                    e.currentTarget.style.boxShadow = "0 4px 14px rgba(34,197,94,0.4)";
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                    e.currentTarget.style.boxShadow = "none";
-                }}
-            >
-                {isLogin ? 'Login' : 'Sign Up'}
-            </button>
-
-            <button onClick={() => setIsLogin(!isLogin)}
-                style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', fontSize: '13px' }}>
-                {isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login"}
-            </button>
 
             <button
                 onClick={onGuest}
-                style={{
-                    background: 'none',
-                    border: '1px solid #334155',
-                    color: '#64748b',
-                    cursor: 'pointer',
-                    padding: '8px 20px',
-                    borderRadius: '6px',
-                    marginTop: '8px',
-                    fontSize: '13px',
-                    transition: 'all 0.2s ease'
-                }}
-                onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "#22c55e";
-                    e.currentTarget.style.color = "#22c55e";
-                    e.currentTarget.style.transform = "translateY(-1px)";
-                }}
-                onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "#334155";
-                    e.currentTarget.style.color = "#64748b";
-                    e.currentTarget.style.transform = "translateY(0)";
-                }}
+                className="login-guest-btn"
             >
-                Continue as Guest →
+                Continue as Guest
             </button>
+
+            <div className="login-footer">
+                <p>
+                    {isLogin ? "Don't have an account? " : "Already have an account? "}
+                    <button
+                        type="button"
+                        onClick={() => setIsLogin(!isLogin)}
+                        className="login-link-btn"
+                    >
+                        {isLogin ? <span className="highlight-signup">Sign Up</span> : <span className="highlight-login">Login</span>}
+                    </button>
+                </p>
+            </div>
+          </div>
         </div>
     );
 }

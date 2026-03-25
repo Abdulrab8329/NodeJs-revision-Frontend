@@ -1,0 +1,183 @@
+.header-container {
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: fadeIn 0.5s ease;
+}
+
+.sidebar-toggle {
+  background: transparent;
+  border: 1px solid #475569;
+  color: #f8fafc;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.sidebar-toggle:hover {
+  background: #334155;
+}
+
+.title-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.main-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.header-right {
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 0.5s ease 0.1s both;
+}
+
+.progress-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-text {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+}
+
+.progress-bar-bg {
+  width: 160px;
+  height: 6px;
+  background: #334155;
+  border-radius: 3px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.progress-percentage {
+  font-size: 10px;
+  color: #60a5fa;
+  margin-top: 4px;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: default;
+  transition: background 0.2s ease;
+}
+
+.user-chip:hover {
+  background: #1e293b;
+}
+
+.username {
+  font-size: 13px;
+  color: #f8fafc;
+  font-weight: 500;
+}
+
+.guest-chip {
+  font-size: 12px;
+  color: #f8fafc;
+  background: #0f172a;
+  border: 1px solid #334155;
+  padding: 6px 14px;
+  border-radius: 6px;
+}
+
+.header-btn, .logout-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  color: #f8fafc;
+}
+
+.header-btn:hover {
+  background: #334155;
+  border-color: #64748b;
+}
+
+.logout-btn:hover {
+  background: #475569;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 12px 16px;
+  }
+  
+  .hide-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block !important;
+  }
+
+  .main-title {
+    font-size: 18px;
+    white-space: nowrap;
+  }
+
+  .header-left {
+    gap: 12px;
+  }
+
+  .header-right {
+    gap: 12px;
+  }
+}

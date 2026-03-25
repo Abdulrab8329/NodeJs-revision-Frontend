@@ -1,0 +1,21 @@
+.node-revision-app {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #0f172a;
+  min-height: 100vh;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-layout {
+  display: flex;
+  height: calc(100vh - 71px);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .main-layout {
+    height: calc(100vh - 65px);
+  }
+}
